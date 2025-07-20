@@ -41,11 +41,11 @@ namespace ClubManagementApp.ViewModels
             Console.WriteLine("[EVENT_MANAGEMENT_VM] EventManagementViewModel initialized successfully");
         }
 
-        private bool IsOwner(User user, int clubId)
+        private bool IsOwner(User user, int createdBy)
         {
             if (_authorizationService.IsAdmin(user) || user.Role is UserRole.Member) return true;
 
-            return user.ClubID == clubId;
+            return user.UserID == createdBy;
         }
 
         public ObservableCollection<Event> Events
@@ -315,7 +315,7 @@ namespace ClubManagementApp.ViewModels
                 // Load events
                 Console.WriteLine("[EVENT_MANAGEMENT_VM] Loading events...");
                 var events = await _eventService.GetAllEventsAsync();
-                events = events.Where(e => IsOwner(CurrentUser!, e.ClubID)).ToList();
+                events = events.Where(e => IsOwner(CurrentUser!, e.Club.CreatedBy)).ToList();
                 Events.Clear();
                 foreach (var eventItem in events)
                 {
@@ -374,8 +374,8 @@ namespace ClubManagementApp.ViewModels
             {
                 filtered = SelectedStatus?.Content switch
                 {
-                    "Upcoming" => filtered.Where(e => e.Status == EventStatus.Scheduled),
-                    "Ongoing" => filtered.Where(e => e.Status == EventStatus.InProgress),
+                    "Scheduled" => filtered.Where(e => e.Status == EventStatus.Scheduled),
+                    "InProgress" => filtered.Where(e => e.Status == EventStatus.InProgress),
                     "Cancelled" => filtered.Where(e => e.Status == EventStatus.Cancelled),
                     "Completed" => filtered.Where(e => e.Status == EventStatus.Completed),
                     _ => filtered

@@ -162,8 +162,8 @@
                           Padding="10,8"
                           FontSize="14">
                     <ComboBoxItem IsSelected="True" Content="All Events"/>
-                    <ComboBoxItem Content="Upcoming"/>
-                    <ComboBoxItem Content="Ongoing"/>
+                    <ComboBoxItem Content="Scheduled"/>
+                    <ComboBoxItem Content="InProgress"/>
                     <ComboBoxItem Content="Completed"/>
                     <ComboBoxItem Content="Cancelled"/>
                 </ComboBox>
@@ -322,16 +322,6 @@
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <TextBlock Text="Total Events: " FontWeight="SemiBold"/>
                 <TextBlock Text="{Binding FilteredEvents.Count}" FontWeight="Bold" Foreground="Black"/>
-                
-                <TextBlock Text=" | Upcoming: " Margin="20,0,0,0" FontWeight="SemiBold"/>
-                <TextBlock Text="{Binding UpcomingEventsCount}" FontWeight="Bold" Foreground="Black"/>
-                
-                <TextBlock Text=" | Ongoing: " Margin="20,0,0,0" FontWeight="SemiBold"/>
-                <TextBlock Text="{Binding OngoingEventsCount}" FontWeight="Bold" Foreground="Black"/>
-                
-                <TextBlock Text=" | Loading: " Margin="20,0,0,0" FontWeight="SemiBold"/>
-                <TextBlock Text="{Binding IsLoading}" FontWeight="Bold" 
-                          Foreground="{Binding IsLoading, Converter={StaticResource BooleanToColorConverter}}"/>
             </StackPanel>
             
             <StackPanel Grid.Column="1" Orientation="Horizontal">

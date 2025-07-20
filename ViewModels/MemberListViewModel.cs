@@ -166,9 +166,9 @@ namespace ClubManagementApp.ViewModels
         {
             AddMemberCommand = new RelayCommand(AddMember, _ => CanAddMember());
             EditMemberCommand = new RelayCommand<User>(EditMember, CanEditMember);
-            DeleteMemberCommand = new RelayCommand<User>(DeleteMember, CanDeleteMember);
+            DeleteMemberCommand = new RelayCommand<User>(DeleteMember, (_) => true);
             RefreshCommand = new RelayCommand(async _ => await RefreshMembersAsync(), _ => CanAccessUserManagement && !IsLoading && !_disposed);
-            ExportMembersCommand = new RelayCommand(ExportMembers, _ => CanExportMembers());
+            ExportMembersCommand = new RelayCommand(ExportMembers, (_) => true);
         }
 
         private bool CanExecuteCommand() => !IsLoading && !_disposed;
@@ -508,11 +508,11 @@ namespace ClubManagementApp.ViewModels
                 {
                     Console.WriteLine($"[MemberListViewModel] Exporting {FilteredMembers.Count} members to: {saveFileDialog.FileName}");
                     var csvContent = new StringBuilder();
-                    csvContent.AppendLine("Full Name,Email,Role,Club,Join Date,Status");
+                    csvContent.AppendLine("Full Name,Email,Role,Club,Join Date");
 
                     foreach (var member in FilteredMembers)
                     {
-                        csvContent.AppendLine($"{member.FullName},{member.Email},{member.Role},{member.Club?.Name ?? "N/A"},{member.JoinDate:yyyy-MM-dd},{(member.IsActive ? "Active" : "Inactive")}");
+                        csvContent.AppendLine($"{member.FullName},{member.Email},{member.Role},{_clubFilter!.Name ?? "N/A"},{member.JoinDate:yyyy-MM-dd}");
                     }
 
                     await File.WriteAllTextAsync(saveFileDialog.FileName, csvContent.ToString());

@@ -180,14 +180,17 @@ namespace ClubManagementApp.ViewModels
             }
         }
 
-        private void EditUser()
+        private async void EditUser()
         {
             if (SelectedUser == null) return;
 
             try
             {
+                
                 _navigationService.ShowEditUserDialog(SelectedUser);
-                _ = LoadUsersAsync(); // Refresh after potential changes
+
+                
+                await LoadUsersAsync();
             }
             catch (Exception ex)
             {

@@ -103,13 +103,8 @@
                               VerticalContentAlignment="Center">
                         <ComboBox.Items>
                             <ComboBoxItem IsSelected="True" Content="All Roles" Tag="{x:Null}"/>
-                            <ComboBoxItem Content="System Admin" Tag="{x:Static models:UserRole.SystemAdmin}"/>
                             <ComboBoxItem Content="Admin" Tag="{x:Static models:UserRole.Admin}"/>
-                            <ComboBoxItem Content="Club President" Tag="{x:Static models:UserRole.ClubPresident}"/>
                             <ComboBoxItem Content="Chairman" Tag="{x:Static models:UserRole.Chairman}"/>
-                            <ComboBoxItem Content="Vice Chairman" Tag="{x:Static models:UserRole.ViceChairman}"/>
-                            <ComboBoxItem Content="Club Officer" Tag="{x:Static models:UserRole.ClubOfficer}"/>
-                            <ComboBoxItem Content="Team Leader" Tag="{x:Static models:UserRole.TeamLeader}"/>
                             <ComboBoxItem Content="Member" Tag="{x:Static models:UserRole.Member}"/>
                         </ComboBox.Items>
                     </ComboBox>

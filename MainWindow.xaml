@@ -444,39 +444,6 @@
                                             <TextBlock Text="Tác Vụ Chính" FontSize="14" FontWeight="SemiBold" 
                                                    Foreground="#374151" Margin="0,0,0,8"/>
                                             
-                                            <!-- Create Event Card -->
-                                            <Border Background="#F8FAFC" CornerRadius="12" Padding="16" Margin="0,0,0,8"
-                                                BorderBrush="#E2E8F0" BorderThickness="1"
-                                               Visibility="{Binding CanCreateEvents, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                                <Button Background="Transparent" BorderThickness="0" Padding="0"
-                                                    Command="{Binding EventManagementViewModel.AddEventCommand}"
-                                                    HorizontalContentAlignment="Stretch">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Border Grid.Column="0" Background="#F59E0B" CornerRadius="8" 
-                                                            Width="32" Height="32" Margin="0,0,12,0">
-                                                            <TextBlock Text="📅" Foreground="White" FontSize="16" HorizontalAlignment="Center" 
-                                                                   VerticalAlignment="Center"/>
-                                                        </Border>
-                                                        
-                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                            <TextBlock Text="Tạo Sự Kiện Mới" FontSize="14" FontWeight="Medium" 
-                                                                   Foreground="#F59E0B"/>
-                                                            <TextBlock Text="Thêm sự kiện cho câu lạc bộ" FontSize="12" 
-                                                                   Foreground="#6B7280"/>
-                                                        </StackPanel>
-                                                        
-                                                        <TextBlock Grid.Column="2" Text="→" FontSize="16" 
-                                                               Foreground="#9CA3AF" VerticalAlignment="Center"/>
-                                                    </Grid>
-                                                </Button>
-                                            </Border>
-
                                             <!-- Add Club Card -->
                                             <Border Background="#F8FAFC" CornerRadius="12" Padding="16" Margin="0,0,0,8"
                                                 BorderBrush="#E2E8F0" BorderThickness="1"
@@ -1231,15 +1198,6 @@
                                 <TextBlock Text="Làm Mới" FontSize="14"/>
                             </StackPanel>
                         </Button>
-
-                        <Button Grid.Column="2" Background="#F59E0B" Foreground="White" BorderThickness="0"
-                            Padding="20,12" FontWeight="Medium"
-                            Command="{Binding EventManagementViewModel.AddEventCommand}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="📅" FontSize="16" Margin="0,0,8,0"/>
-                                <TextBlock Text="Tạo Sự Kiện" FontSize="14"/>
-                            </StackPanel>
-                        </Button>
                     </Grid>
 
                     <!-- Modern Controls -->
@@ -1280,8 +1238,8 @@
                                   Foreground="Black" FontWeight="Medium"
                                   SelectedItem="{Binding EventManagementViewModel.SelectedStatus}">
                                 <ComboBoxItem IsSelected="True" Content="All Events"/>
-                                <ComboBoxItem Content="Upcoming"/>
-                                <ComboBoxItem Content="Ongoing"/>
+                                <ComboBoxItem Content="Scheduled"/>
+                                <ComboBoxItem Content="InProgress"/>
                                 <ComboBoxItem Content="Completed"/>
                                 <ComboBoxItem Content="Cancelled"/>
                             </ComboBox>
@@ -1378,7 +1336,7 @@
                                                         </Button>
 
                                                         <Button Background="#27AE60" Foreground="White" BorderThickness="0"
-                                                                Padding="8" Margin="0,0,4,0" ToolTip="View"
+                                                                Padding="8" Margin="0,0,4,0" ToolTip="Join"
                                                                 Command="{Binding DataContext.EventManagementViewModel.JoinEventCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                                 CommandParameter="{Binding}"
                                                                 Visibility="{Binding CanJoinEvents, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -1394,7 +1352,7 @@
                                                         </Button>
 
                                                         <Button Background="#3498DB" Foreground="White" BorderThickness="0"
-                                                                Padding="8" Margin="2,0" ToolTip="Edit"
+                                                                Padding="8" Margin="2,0" ToolTip="Manage"
                                                                 Command="{Binding DataContext.EventManagementViewModel.ManageParticipantsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                                 CommandParameter="{Binding}">
                                                                 <TextBlock Text="✔" FontSize="12"/>

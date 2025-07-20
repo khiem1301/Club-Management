@@ -55,6 +55,7 @@ namespace ClubManagementApp.ViewModels
 
             InitializeCommands();
             InitializeChildViewModels();
+            InitializeCurrentView();
             Console.WriteLine("[MainViewModel] MainViewModel initialization completed");
         }
 
@@ -227,6 +228,32 @@ namespace ClubManagementApp.ViewModels
             ClubManagementViewModel = new ClubManagementViewModel(_clubService, _userService, _eventService, _navigationService, _authorizationService);
             ReportsViewModel = new ReportsViewModel(_reportService, _userService, _eventService, _clubService, _authorizationService);
             Console.WriteLine("[MainViewModel] Child ViewModels initialized successfully");
+        }
+
+        public async Task LoadCurrentUserAsync()
+        {
+            try
+            {
+                CurrentUser = await _userService.GetCurrentUserAsync();
+                Console.WriteLine($"[DashboardViewModel] Current user loaded: {CurrentUser?.FullName} (Role: {CurrentUser?.Role})");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[DashboardViewModel] Error loading current user: {ex.Message}");
+                CurrentUser = null;
+            }
+        }
+
+        private async void InitializeCurrentView()
+        {
+            await LoadCurrentUserAsync();
+            CurrentView = CurrentUser!.Role switch
+            {
+                UserRole.Admin => "Dashboard",
+                UserRole.Chairman => "Clubs",
+                UserRole.Member => "Events",
+                _ => "Dashboard",
+            };
         }
 
         private async Task LoadDataAsync()

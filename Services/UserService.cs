@@ -58,6 +58,7 @@ namespace ClubManagementApp.Services
                 var users = await _context.Users
                     .Include(u => u.Club) // Load related club data for display
                     .OrderBy(u => u.FullName) // Alphabetical sorting for user-friendly display
+                    .AsNoTracking()
                     .ToListAsync();
                 return users;
             }

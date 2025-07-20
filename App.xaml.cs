@@ -27,9 +27,7 @@ namespace ClubManagementApp
     /// </summary>
     public partial class App : Application
     {
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+        
 
         /// <summary>
         /// Service provider for dependency injection container.
@@ -57,7 +55,7 @@ namespace ClubManagementApp
         protected override async void OnStartup(StartupEventArgs e)
         {
             // Allocate console for debugging
-            AllocConsole();
+            
             Console.WriteLine("=== APPLICATION STARTING ===");
 
             try
@@ -82,7 +80,6 @@ namespace ClubManagementApp
                 {
                     var context = scope.ServiceProvider.GetRequiredService<ClubManagementDbContext>();
 
-                    
                 }
                 Console.WriteLine("Database initialized successfully.");
 

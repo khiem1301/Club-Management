@@ -20,7 +20,7 @@ namespace ClubManagementApp.Views
         {
             if (user?.Role is UserRole.Chairman)
             {
-                ClubComboBox.ItemsSource = clubs.Where(c => c.ClubID == user.ClubID).ToList();
+                ClubComboBox.ItemsSource = clubs.Where(c => c.CreatedBy == user.UserID).ToList();
             }
             else
                 ClubComboBox.ItemsSource = clubs;

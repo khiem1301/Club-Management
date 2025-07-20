@@ -1,4 +1,5 @@
 using System.Windows.Controls;
+using ClubManagementApp.ViewModels;
 
 namespace ClubManagementApp.Views
 {

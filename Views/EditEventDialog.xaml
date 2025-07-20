@@ -365,7 +365,6 @@
                                     <ComboBoxItem Content="In Progress" Tag="{x:Static models:EventStatus.InProgress}"/>
                                     <ComboBoxItem Content="Completed" Tag="{x:Static models:EventStatus.Completed}"/>
                                     <ComboBoxItem Content="Cancelled" Tag="{x:Static models:EventStatus.Cancelled}"/>
-                                    <ComboBoxItem Content="Postponed" Tag="{x:Static models:EventStatus.Postponed}"/>
                                 </ComboBox>
                             </StackPanel>
                         </Grid>

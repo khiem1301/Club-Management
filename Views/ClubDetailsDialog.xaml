@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Club Details" 
-        Height="600" Width="800"
+        Height="500" Width="800"
         WindowStartupLocation="CenterOwner"
         ResizeMode="CanResize">
     
@@ -106,36 +106,25 @@
             <StackPanel>
                 <!-- Basic Information -->
                 <TextBlock Text="Basic Information" Style="{StaticResource HeaderTextStyle}"/>
-                
+
                 <Grid Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                        <TextBlock Text="Description" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="DescriptionTextBlock" Style="{StaticResource ValueStyle}"/>
-                        
-                        <TextBlock Text="Founded Date" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="FoundedDateTextBlock" Style="{StaticResource ValueStyle}"/>
-                        
-                        <TextBlock Text="Meeting Schedule" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="MeetingScheduleTextBlock" Style="{StaticResource ValueStyle}"/>
+                        <TextBlock Text="Description" Style="{StaticResource LabelStyle}" />
+                        <TextBlock x:Name="DescriptionTextBlock" Style="{StaticResource ValueStyle}" />
                     </StackPanel>
-                    
-                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBlock Text="Contact Email" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="ContactEmailTextBlock" Style="{StaticResource ValueStyle}"/>
-                        
-                        <TextBlock Text="Contact Phone" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="ContactPhoneTextBlock" Style="{StaticResource ValueStyle}"/>
-                        
-                        <TextBlock Text="Website" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock x:Name="WebsiteTextBlock" Style="{StaticResource ValueStyle}"/>
+
+                    <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                        <TextBlock Text="Founded Date" Style="{StaticResource LabelStyle}" />
+                        <TextBlock x:Name="FoundedDateTextBlock" Style="{StaticResource ValueStyle}" />
                     </StackPanel>
                 </Grid>
-                
+
+
                 <!-- Statistics -->
                 <TextBlock Text="Statistics" Style="{StaticResource HeaderTextStyle}"/>
                 

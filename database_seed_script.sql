@@ -43,7 +43,8 @@ CREATE TABLE Clubs (
     FoundedDate datetime2 NULL,
     IsActive bit NOT NULL DEFAULT 1,
     IsSelected bit NOT NULL DEFAULT 0,
-    CreatedDate datetime2 NOT NULL DEFAULT GETDATE()
+    CreatedDate datetime2 NOT NULL DEFAULT GETDATE(),
+    CreatedBy int,
 );
 GO
 
@@ -128,17 +129,17 @@ GO
 -- ========================================
 
 -- Insert Clubs
-INSERT INTO Clubs (Name, Description, ContactEmail, ContactPhone, Website, MeetingSchedule, FoundedDate, IsActive, IsSelected, CreatedDate) VALUES
-('Computer Science Club', 'A club for computer science enthusiasts to learn and share knowledge about programming, algorithms, and technology.', 'cs.club@university.edu', '555-0101', 'https://csclub.university.edu', 'Fridays 3:00 PM - Room 201', '2020-09-15', 1, 0, '2025-01-15'),
-('Drama Society', 'Dedicated to theatrical performances, script writing, and dramatic arts education.', 'drama@university.edu', '555-0102', 'https://drama.university.edu', 'Wednesdays 4:00 PM - Theater', '2019-03-20', 1, 0, '2025-01-20'),
-('Environmental Club', 'Focused on environmental conservation, sustainability projects, and eco-friendly initiatives.', 'eco.club@university.edu', '555-0103', 'https://ecoclub.university.edu', 'Tuesdays 2:00 PM - Green Room', '2021-04-22', 1, 0, '2025-02-01'),
-('Photography Club', 'For photography enthusiasts to improve skills, share techniques, and organize photo walks.', 'photo@university.edu', '555-0104', 'https://photoclub.university.edu', 'Saturdays 10:00 AM - Studio', '2020-11-10', 1, 0, '2025-02-10'),
-('Debate Society', 'Enhancing public speaking, critical thinking, and argumentation skills through structured debates.', 'debate@university.edu', '555-0105', 'https://debate.university.edu', 'Thursdays 5:00 PM - Hall A', '2018-01-15', 1, 0, '2025-02-15'),
-('Music Club', 'Bringing together musicians of all levels to perform, collaborate, and appreciate various music genres.', 'music@university.edu', '555-0106', 'https://musicclub.university.edu', 'Mondays 6:00 PM - Music Room', '2017-08-30', 1, 0, '2025-03-01'),
-('Sports Club', 'Organizing various sports activities, tournaments, and promoting physical fitness among students.', 'sports@university.edu', '555-0107', 'https://sportsclub.university.edu', 'Daily 7:00 AM - Gym', '2016-05-12', 1, 0, '2025-03-05'),
-('Literature Society', 'For book lovers, creative writers, and those passionate about literature and poetry.', 'literature@university.edu', '555-0108', 'https://litclub.university.edu', 'Sundays 3:00 PM - Library', '2019-10-05', 1, 0, '2025-03-10'),
-('Science Innovation Lab', 'Encouraging scientific research, innovation projects, and STEM education initiatives.', 'scilab@university.edu', '555-0109', 'https://scilab.university.edu', 'Wednesdays 1:00 PM - Lab 301', '2021-02-28', 1, 0, '2025-03-15'),
-('Cultural Heritage Club', 'Preserving and promoting cultural traditions, organizing cultural events and festivals.', 'culture@university.edu', '555-0110', 'https://culture.university.edu', 'Fridays 4:00 PM - Cultural Center', '2020-07-18', 1, 0, '2025-03-20');
+INSERT INTO Clubs (Name, Description, ContactEmail, ContactPhone, Website, MeetingSchedule, FoundedDate, IsActive, IsSelected, CreatedDate, CreatedBy) VALUES
+('Computer Science Club', 'A club for computer science enthusiasts to learn and share knowledge about programming, algorithms, and technology.', 'cs.club@university.edu', '555-0101', 'https://csclub.university.edu', 'Fridays 3:00 PM - Room 201', '2020-09-15', 1, 0, '2025-01-15',1),
+('Drama Society', 'Dedicated to theatrical performances, script writing, and dramatic arts education.', 'drama@university.edu', '555-0102', 'https://drama.university.edu', 'Wednesdays 4:00 PM - Theater', '2019-03-20', 1, 0, '2025-01-20',2),
+('Environmental Club', 'Focused on environmental conservation, sustainability projects, and eco-friendly initiatives.', 'eco.club@university.edu', '555-0103', 'https://ecoclub.university.edu', 'Tuesdays 2:00 PM - Green Room', '2021-04-22', 1, 0, '2025-02-01',3),
+('Photography Club', 'For photography enthusiasts to improve skills, share techniques, and organize photo walks.', 'photo@university.edu', '555-0104', 'https://photoclub.university.edu', 'Saturdays 10:00 AM - Studio', '2020-11-10', 1, 0, '2025-02-10',4),
+('Debate Society', 'Enhancing public speaking, critical thinking, and argumentation skills through structured debates.', 'debate@university.edu', '555-0105', 'https://debate.university.edu', 'Thursdays 5:00 PM - Hall A', '2018-01-15', 1, 0, '2025-02-15',5),
+('Music Club', 'Bringing together musicians of all levels to perform, collaborate, and appreciate various music genres.', 'music@university.edu', '555-0106', 'https://musicclub.university.edu', 'Mondays 6:00 PM - Music Room', '2017-08-30', 1, 0, '2025-03-01',6),
+('Sports Club', 'Organizing various sports activities, tournaments, and promoting physical fitness among students.', 'sports@university.edu', '555-0107', 'https://sportsclub.university.edu', 'Daily 7:00 AM - Gym', '2016-05-12', 1, 0, '2025-03-05',7),
+('Literature Society', 'For book lovers, creative writers, and those passionate about literature and poetry.', 'literature@university.edu', '555-0108', 'https://litclub.university.edu', 'Sundays 3:00 PM - Library', '2019-10-05', 1, 0, '2025-03-10',8),
+('Science Innovation Lab', 'Encouraging scientific research, innovation projects, and STEM education initiatives.', 'scilab@university.edu', '555-0109', 'https://scilab.university.edu', 'Wednesdays 1:00 PM - Lab 301', '2021-02-28', 1, 0, '2025-03-15',1),
+('Cultural Heritage Club', 'Preserving and promoting cultural traditions, organizing cultural events and festivals.', 'culture@university.edu', '555-0110', 'https://culture.university.edu', 'Fridays 4:00 PM - Cultural Center', '2020-07-18', 1, 0, '2025-03-20',2);
 GO
 
 -- Insert Users (1 Admin, 2 Chairman, 5 Member)
@@ -161,56 +162,58 @@ GO
 -- Insert Events
 INSERT INTO Events (Name, Description, EventDate, Location, CreatedDate, IsActive, RegistrationDeadline, MaxParticipants, ClubID) VALUES
 -- Computer Science Club Events
-('Python Workshop', 'Learn Python programming from basics to advanced concepts', '2025-12-15 14:00:00', 'Computer Lab A', '2025-11-01', 1, '2025-12-10', 30, 1),
-('Hackathon 2025', '24-hour coding competition with exciting prizes', '2025-12-20 09:00:00', 'Main Auditorium', '2025-11-05', 1, '2025-12-15', 100, 1),
-('AI and Machine Learning Seminar', 'Industry experts discuss the future of AI', '2026-01-10 16:00:00', 'Conference Room B', '2025-11-10', 1, '2026-01-05', 50, 1),
+('Python Workshop', 'Learn Python programming from basics to advanced concepts', '2025-12-15 14:00:00', 'Computer Lab A', '2025-06-01', 1, '2025-07-10', 30, 1),
+('Hackathon 2025', '24-hour coding competition with exciting prizes', '2025-12-20 09:00:00', 'Main Auditorium', '2025-06-05', 1, '2025-07-10', 100, 1),
+('AI and Machine Learning Seminar', 'Industry experts discuss the future of AI', '2026-01-10 16:00:00', 'Conference Room B', '2025-06-10', 1, '2025-07-10', 50, 1),
 
 -- Photography Club Events
-('Nature Photography Walk', 'Capture the beauty of campus nature', '2025-12-12 08:00:00', 'University Gardens', '2025-11-02', 1, '2025-12-08', 20, 4),
-('Portrait Photography Workshop', 'Learn professional portrait techniques', '2025-12-18 13:00:00', 'Studio Room 1', '2025-11-06', 1, '2025-12-15', 15, 4),
-('Photo Exhibition Setup', 'Prepare for the annual photo exhibition', '2026-01-15 10:00:00', 'Gallery Hall', '2025-11-12', 1, '2026-01-10', 25, 4),
+('Nature Photography Walk', 'Capture the beauty of campus nature', '2025-12-12 08:00:00', 'University Gardens', '2025-06-02', 1, '2025-07-08', 20, 4),
+('Portrait Photography Workshop', 'Learn professional portrait techniques', '2025-12-18 13:00:00', 'Studio Room 1', '2025-06-06', 1, '2025-07-10', 15, 4),
+('Photo Exhibition Setup', 'Prepare for the annual photo exhibition', '2026-01-15 10:00:00', 'Gallery Hall', '2025-06-12', 1, '2025-07-10', 25, 4),
 
 -- Drama Society Events
-('Romeo and Juliet Auditions', 'Auditions for the spring play', '2025-12-14 15:00:00', 'Theater Room', '2025-11-03', 1, '2025-12-12', 40, 2),
-('Acting Workshop', 'Improve your acting skills with professional coaches', '2025-12-21 11:00:00', 'Drama Studio', '2025-11-07', 1, '2025-12-18', 25, 2),
+('Romeo and Juliet Auditions', 'Auditions for the spring play', '2025-12-14 15:00:00', 'Theater Room', '2025-06-03', 1, '2025-07-10', 40, 2),
+('Acting Workshop', 'Improve your acting skills with professional coaches', '2025-12-21 11:00:00', 'Drama Studio', '2025-06-07', 1, '2025-07-10', 25, 2),
 
 -- Environmental Club Events
-('Campus Cleanup Drive', 'Help keep our campus clean and green', '2025-12-13 07:00:00', 'Campus Grounds', '2025-11-04', 1, '2025-12-11', 50, 3),
-('Sustainability Fair', 'Learn about sustainable living practices', '2025-12-19 12:00:00', 'Student Center', '2025-11-08', 1, '2025-12-16', 100, 3),
+('Campus Cleanup Drive', 'Help keep our campus clean and green', '2025-12-13 07:00:00', 'Campus Grounds', '2025-06-04', 1, '2025-07-10', 50, 3),
+('Sustainability Fair', 'Learn about sustainable living practices', '2025-12-19 12:00:00', 'Student Center', '2025-06-08', 1, '2025-07-10', 100, 3),
 
 -- Music Club Events
-('Winter Concert', 'Showcase of student musical talents', '2025-12-22 19:00:00', 'Music Hall', '2025-11-09', 1, '2025-12-20', 200, 6),
-('Songwriting Workshop', 'Learn to write your own songs', '2026-01-08 14:00:00', 'Music Room 2', '2025-11-11', 1, '2026-01-05', 20, 6);
+('Winter Concert', 'Showcase of student musical talents', '2025-12-22 19:00:00', 'Music Hall', '2025-06-09', 1, '2025-07-10', 200, 6),
+('Songwriting Workshop', 'Learn to write your own songs', '2026-01-08 14:00:00', 'Music Room 2', '2025-06-11', 1, '2025-07-10', 20, 6);
 GO
+
 
 -- Insert Event Participants
 INSERT INTO EventParticipants (UserID, EventID, Status, RegistrationDate, AttendanceDate) VALUES
 -- Python Workshop (EventID: 1)
-(2, 1, 'Attended', '2025-11-15', '2025-12-15'), -- Alice (Chairman) - Attended
-(3, 1, 'Registered', '2025-11-16', NULL), -- Bob (Chairman) - Registered
-(4, 1, 'Registered', '2025-11-17', NULL), -- Carol (Member) - Registered
-(5, 1, 'Absent', '2025-11-18', NULL), -- David (Member) - Absent
+(2, 1, 'Attended', '2025-06-15', '2025-12-15'),
+(3, 1, 'Registered', '2025-06-16', NULL),
+(4, 1, 'Registered', '2025-06-17', NULL),
+(5, 1, 'Absent', '2025-06-18', NULL),
 
 -- Hackathon 2025 (EventID: 2)
-(2, 2, 'Registered', '2025-11-20', NULL), -- Alice (Chairman) - Registered
-(3, 2, 'Registered', '2025-11-21', NULL), -- Bob (Chairman) - Registered
-(4, 2, 'Registered', '2025-11-22', NULL), -- Carol (Member) - Registered
-(5, 2, 'Registered', '2025-11-23', NULL), -- David (Member) - Registered
-(6, 2, 'Registered', '2025-11-24', NULL), -- Emma (Member) - Registered
+(2, 2, 'Registered', '2025-06-20', NULL),
+(3, 2, 'Registered', '2025-06-21', NULL),
+(4, 2, 'Registered', '2025-06-22', NULL),
+(5, 2, 'Registered', '2025-06-23', NULL),
+(6, 2, 'Registered', '2025-06-24', NULL),
 
 -- Nature Photography Walk (EventID: 4)
-(5, 4, 'Attended', '2025-11-25', '2025-12-12'), -- David (Member) - Attended
-(6, 4, 'Attended', '2025-11-26', '2025-12-12'), -- Emma (Member) - Attended
-(7, 4, 'Attended', '2025-11-27', '2025-12-12'), -- Frank (Member) - Attended
-(8, 4, 'Absent', '2025-11-28', NULL), -- Grace (Member) - Absent
+(5, 4, 'Attended', '2025-06-25', '2025-12-12'),
+(6, 4, 'Attended', '2025-06-26', '2025-12-12'),
+(7, 4, 'Attended', '2025-06-27', '2025-12-12'),
+(8, 4, 'Absent', '2025-06-28', NULL),
 
 -- Campus Cleanup Drive (EventID: 9)
-(4, 9, 'Attended', '2025-11-29', '2025-12-13'), -- Carol (Member) - Attended
-(5, 9, 'Attended', '2025-11-30', '2025-12-13'), -- David (Member) - Attended
-(6, 9, 'Attended', '2025-12-01', '2025-12-13'), -- Emma (Member) - Attended
-(2, 9, 'Attended', '2025-12-02', '2025-12-13'), -- Alice (Chairman) - Cross-club participation
-(7, 9, 'Attended', '2025-12-03', '2025-12-13'); -- Frank (Member) - Cross-club participation
+(4, 9, 'Attended', '2025-06-29', '2025-12-13'),
+(5, 9, 'Attended', '2025-06-30', '2025-12-13'),
+(6, 9, 'Attended', '2025-07-01', '2025-12-13'),
+(2, 9, 'Attended', '2025-07-02', '2025-12-13'),
+(7, 9, 'Attended', '2025-07-03', '2025-12-13');
 GO
+
 
 -- Insert Reports
 INSERT INTO Reports (Title, Type, Content, GeneratedDate, Semester, ClubID, GeneratedByUserID) VALUES

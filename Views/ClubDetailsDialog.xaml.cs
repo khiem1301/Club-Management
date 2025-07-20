@@ -31,10 +31,6 @@ namespace ClubManagementApp.Views
                 ClubNameTextBlock.Text = _club.Name;
                 DescriptionTextBlock.Text = _club.Description ?? "No description available";
                 FoundedDateTextBlock.Text = _club.FoundedDate?.ToString("MMMM dd, yyyy") ?? "Not specified";
-                MeetingScheduleTextBlock.Text = _club.MeetingSchedule ?? "Not specified";
-                ContactEmailTextBlock.Text = _club.ContactEmail ?? "Not specified";
-                ContactPhoneTextBlock.Text = _club.ContactPhone ?? "Not specified";
-                WebsiteTextBlock.Text = _club.Website ?? "Not specified";
                 CreatedDateTextBlock.Text = _club.CreatedAt.ToString("MMM yyyy");
 
                 // Status

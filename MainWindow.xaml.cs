@@ -13,6 +13,7 @@ namespace ClubManagementApp
             InitializeComponent();
             ViewModel = viewModel;
             DataContext = viewModel;
+            WindowState = WindowState.Normal;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -139,11 +139,11 @@ namespace ClubManagementApp.ViewModels
         public ICommand ViewMembersCommand { get; private set; } = null!;
         public ICommand ViewEventsCommand { get; private set; } = null!;
 
-        private bool IsOwner(User user, int clubId)
+        private bool IsOwner(User user, int createdBy)
         {
             if (_authorizationService.IsAdmin(user)) return true;
 
-            return user.ClubID == clubId;
+            return user.UserID == createdBy;
         }
 
         private void InitializeCommands()
@@ -229,7 +229,7 @@ namespace ClubManagementApp.ViewModels
                 Console.WriteLine("[ClubManagementViewModel] Starting to load clubs");
                 IsLoading = true;
                 var clubs = await _clubService.GetAllClubsAsync();
-                clubs = clubs.Where(c => IsOwner(CurrentUser!, c.ClubID)).ToList();
+                clubs = clubs.Where(c => IsOwner(CurrentUser!, c.CreatedBy)).ToList();
                 Console.WriteLine($"[ClubManagementViewModel] Retrieved {clubs.Count()} clubs from service");
 
                 Clubs.Clear();
@@ -319,7 +319,7 @@ namespace ClubManagementApp.ViewModels
                 if (dialog.DialogResult == true && dialog.CreatedClub != null)
                 {
                     Console.WriteLine($"[ClubManagementViewModel] Creating new club: {dialog.CreatedClub.Name}");
-                    var createdClub = await _clubService.CreateClubAsync(dialog.CreatedClub);
+                    var createdClub = await _clubService.CreateClubAsync(dialog.CreatedClub, CurrentUser);
 
                     // Load statistics for the new club
                     await LoadClubStatistics(createdClub);

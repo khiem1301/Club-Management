@@ -40,6 +40,8 @@ namespace ClubManagementApp.Models
         // Alias for CreatedDate to match dialog expectations
         public DateTime CreatedAt => CreatedDate;
 
+        public int CreatedBy { get; set; } // Foreign key for the user who created the club
+
         // UI-only property for selection state
         public bool IsSelected
         {
