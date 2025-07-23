@@ -255,7 +255,6 @@
                             <TextBlock Text="💡 Quick Tips" FontWeight="Bold" FontSize="16" Foreground="#495057" Margin="0,0,0,10"/>
                             <TextBlock Text="• Choose a descriptive name that reflects your club's purpose" FontSize="14" Foreground="#6c757d" Margin="0,0,0,5"/>
                             <TextBlock Text="• Write a compelling description to attract new members" FontSize="14" Foreground="#6c757d" Margin="0,0,0,5"/>
-                            <TextBlock Text="• Set status to 'Inactive' if the club is temporarily closed" FontSize="14" Foreground="#6c757d"/>
                         </StackPanel>
                     </Border>
                     

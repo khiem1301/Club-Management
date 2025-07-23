@@ -348,15 +348,7 @@
                                        FontSize="14" 
                                        Foreground="#495057" 
                                        Margin="0,0,0,8"/>
-                            <TextBlock Text="• Minimum 8 characters" 
-                                       FontSize="12" 
-                                       Foreground="#6c757d" 
-                                       Margin="0,2"/>
-                            <TextBlock Text="• At least one uppercase letter" 
-                                       FontSize="12" 
-                                       Foreground="#6c757d" 
-                                       Margin="0,2"/>
-                            <TextBlock Text="• At least one number or special character" 
+                            <TextBlock Text="• Minimum 6 characters" 
                                        FontSize="12" 
                                        Foreground="#6c757d" 
                                        Margin="0,2"/>
